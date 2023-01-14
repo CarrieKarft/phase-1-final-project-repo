@@ -9,7 +9,7 @@ function getingUserInput() {
         e.preventDefault()
         let searchBarText = searchBar.value
         fetchinBookData(searchBarText)
-        console.log(searchBarText)
+        // console.log(searchBarText)
     })
 }
 getingUserInput()
@@ -40,7 +40,12 @@ function gettingTitleFromBookData(bookData) {
 
 function creatingBookResultElements(bookObj) {
     // 6 send these values to function to create elements and apppend these values to DOM for each book
-    console.log(bookObj)
+     if (bookObj.bookAuthor === 'undefined') {
+        console.log("Author Not Available")
+     } else {
+        console.log(bookObj.bookAuthor)
+     }
+    // console.log(bookObj.bookAuthor)
 }
 
 
