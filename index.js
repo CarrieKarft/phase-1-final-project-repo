@@ -44,8 +44,8 @@ function gettingTitleFromBookData(bookData) {
 function creatingBookResultElements(bookObj) {
     // 6 send these values to function to create elements and apppend these values to DOM for each book
     const resultDiv = document.createElement('div');
-    // 7 create event listener when creating elements that listens for the 'keydown' event of user pressing up arrow
-    resultDiv.addEventListener('click', e => {
+    // 7 create event listener when creating elements that listens for the 'dragend' event of user dragging search result elemt over to reading list
+    resultDiv.addEventListener('dragend', e => {
         creatingTheReadingListElements(bookObj);
         // console.log(e.target)
     })
@@ -62,6 +62,7 @@ function creatingBookResultElements(bookObj) {
     resultDiv.appendChild(resultTitle)
     resultDiv.appendChild(resultAuthor)
     resultDiv.setAttribute('class', 'theResults')
+    resultDiv.setAttribute('draggable', 'true')
     const results = document.getElementById('results')
     results.appendChild(resultDiv);
 
