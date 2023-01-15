@@ -22,11 +22,13 @@ function fetchinBookData(searchBarText) {
     .then(bookData => {
         if (bookData.numFound > 0) {
             gettingTitleFromBookData(bookData)
+        } else {
+            noResultsFoundElement()
         }
-
-        // gettingTitleFromBookData(bookData)
     });
 }
+
+
 
 function gettingTitleFromBookData(bookData) {
     console.log(bookData)
