@@ -29,35 +29,41 @@ function fetchinBookData(searchBarText) {
 
 function gettingTitleFromBookData(bookData) {
     // 5 parse through data and select title and author values 
-    const docs = bookData.docs
-    // change to map method later?
-    for (const element of docs) {
+    const docsArray = bookData.docs
+    // console.log(docs)
+    let mapping = docsArray.map(element => {
+        // console.log(element)
         const bookObj = {
             bookTitle: `${element.title}`,
             bookAuthor: `${element.author_name}`,
         }
-        // console.log(bookObj)
         creatingBookResultElements(bookObj)
-    }
+    })
+    // change to map method later?
+    /*for (const element of docs) {
+        const bookObj = {
+            bookTitle: `${element.title}`,
+            bookAuthor: `${element.author_name}`,
+        }*/
+        // creatingBookResultElements(bookObj)
+    // }
 }
 
 function creatingBookResultElements(bookObj) {
+    console.log(bookObj)
     // 6 send these values to function to create elements and apppend these values to DOM for each book
     const resultDiv = document.createElement('div');
     // 7 create event listener when creating elements that listens for the 'dragend' event of user dragging search result elemt over to reading list
     resultDiv.addEventListener('dragend', e => {
         creatingTheReadingListElements(bookObj);
-        // console.log(e.target)
     })
     const resultTitle = document.createElement('h4');
     resultTitle.textContent = bookObj.bookTitle;
     const resultAuthor = document.createElement('p');
     if (bookObj.bookAuthor === 'undefined') {
         resultAuthor.textContent = "Author Not Available"
-        // console.log("Author Not Available")
      } else {
         resultAuthor.textContent = bookObj.bookAuthor;
-        // console.log(bookObj.bookAuthor)
      }
     resultDiv.appendChild(resultTitle)
     resultDiv.appendChild(resultAuthor)
@@ -65,18 +71,15 @@ function creatingBookResultElements(bookObj) {
     resultDiv.setAttribute('draggable', 'true')
     const results = document.getElementById('results')
     results.appendChild(resultDiv);
-
-    // console.log(bookObj.bookAuthor)
 }
 
 function creatingTheReadingListElements(bookObj) {
     // 8 when event is fired take book that event was triggerd for and send data to function to create element in reading list and append to DOM
     const bookListDiv = document.createElement('div');
     // 9 when creating reading list element add event listener 'mouseover' that enlarges the text of the target of the event
-    // addingEventListenersToReadinList(bookListDiv, btn)
     bookListDiv.textContent = bookObj.bookTitle + "  ";
     const btn = document.createElement('button');
-    btn.textContent = "Delete"
+    btn.textContent = "X"
     btn.style.display = "none"
     bookListDiv.appendChild(btn)
     bookListDiv.style.fontSize = '16px';
@@ -92,7 +95,7 @@ function addingEventListenersToReadinList(bookListDiv, btn) {
     bookListDiv.addEventListener('mouseenter', e => {
         // const btn = document.querySelector('button').firstChild;
         btn.style.display = ""
-        console.log(btn)
+        // console.log(btn)
         const eTarget = e.target;
         eTarget.style.fontSize = 'larger'
         // console.log(eTarget)
@@ -105,7 +108,7 @@ function addingEventListenersToReadinList(bookListDiv, btn) {
     btn.addEventListener('click', e => {
         const readingElementDiv = btn.parentElement
         readingElementDiv.remove()
-        console.log(readingElementDiv)
+        // console.log(readingElementDiv)
         // console.log(e.target.parentElement)
     })
 }
