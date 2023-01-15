@@ -74,16 +74,10 @@ function creatingTheReadingListElements(bookObj) {
     const bookListDiv = document.createElement('div');
     // 9 when creating reading list element add event listener 'mouseover' that enlarges the text of the target of the event
     addingEventListenersToReadinList(bookListDiv)
-    /*bookListDiv.addEventListener('mouseenter', e => {
-        const eTarget = e.target;
-        eTarget.style.fontSize = 'larger'
-        console.log(eTarget)
-    })
-    bookListDiv.addEventListener('mouseleave', e => {
-        const eTarget = e.target;
-        eTarget.style.fontSize = '16px'
-    })*/
     bookListDiv.textContent = bookObj.bookTitle;
+    const btn = document.createElement('button');
+    btn.textContent = "Delete"
+    bookListDiv.appendChild(btn)
     bookListDiv.style.fontSize = '16px';
     bookListDiv.setAttribute('class', 'readLater');
     let readingListArray = document.getElementsByClassName('readingListDiv');
@@ -110,8 +104,8 @@ function addingEventListenersToReadinList(bookListDiv) {
 
 // change styling for bigger search bar and submit button
 // refactor code
-// make it so titiles cannot appear more than once in reading list
-// create deletion for reading list
+// make it so titiles cannot appear more than once in reading list?
+// create deletion for reading list + hidden delete button
 // add in array itteration instance
 
 
