@@ -103,7 +103,10 @@ function addingEventListenersToReadinList(bookListDiv, btn) {
         btn.style.display = "none"
     })
     btn.addEventListener('click', e => {
-        console.log(e.target)
+        const readingElementDiv = btn.parentElement
+        readingElementDiv.remove()
+        console.log(readingElementDiv)
+        // console.log(e.target.parentElement)
     })
 }
 
