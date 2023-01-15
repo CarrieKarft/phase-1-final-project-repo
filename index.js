@@ -7,6 +7,7 @@ function getingUserInput() {
     submitButton.addEventListener('click', e => {
         // 2 when submit button 'clicked' (event) send that input text to our fetch request
         e.preventDefault()
+        document.getElementById('results').innerHTML = ''
         let searchBarText = searchBar.value
         fetchinBookData(searchBarText)
         // console.log(searchBarText)
@@ -28,6 +29,7 @@ function fetchinBookData(searchBarText) {
 function gettingTitleFromBookData(bookData) {
     // 5 parse through data and select title and author values 
     const docs = bookData.docs
+    // change to map method later?
     for (const element of docs) {
         const bookObj = {
             bookTitle: `${element.title}`,
@@ -40,11 +42,23 @@ function gettingTitleFromBookData(bookData) {
 
 function creatingBookResultElements(bookObj) {
     // 6 send these values to function to create elements and apppend these values to DOM for each book
-     if (bookObj.bookAuthor === 'undefined') {
+    const resultDiv = document.createElement('div');
+    const resultTitle = document.createElement('h4');
+    resultTitle.textContent = bookObj.bookTitle;
+    const resultAuthor = document.createElement('p');
+    if (bookObj.bookAuthor === 'undefined') {
+        resultAuthor.textContent = "Author Not Available"
         console.log("Author Not Available")
      } else {
+        resultAuthor.textContent = bookObj.bookAuthor;
         console.log(bookObj.bookAuthor)
      }
+    resultDiv.appendChild(resultTitle)
+    resultDiv.appendChild(resultAuthor)
+    resultDiv.setAttribute('class', 'theResults')
+    const results = document.getElementById('results')
+    results.appendChild(resultDiv);
+
     // console.log(bookObj.bookAuthor)
 }
 
