@@ -3,7 +3,6 @@ function getingUserInput() {
     // 1 grab the text entered into search bar by user
     const searchBar = document.getElementById('searchBar');
     const submitButton = document.getElementById('submitButton');
-    // console.log(submitButton)
     submitButton.addEventListener('click', e => {
         // 2 when submit button 'clicked' (event) send that input text to our fetch request
         e.preventDefault()
@@ -11,7 +10,6 @@ function getingUserInput() {
         let searchBarText = searchBar.value
         fetchinBookData(searchBarText)
         document.getElementById('bookForm').reset()
-        // console.log(searchBarText)
     })
 }
 getingUserInput()
@@ -22,35 +20,29 @@ function fetchinBookData(searchBarText) {
     .then(resp => resp.json())
     // 4 return data from api
     .then(bookData => {
-        // console.log(bookData)
-        gettingTitleFromBookData(bookData)
+        if (bookData.numFound > 0) {
+            gettingTitleFromBookData(bookData)
+        }
+
+        // gettingTitleFromBookData(bookData)
     });
 }
 
 function gettingTitleFromBookData(bookData) {
+    console.log(bookData)
     // 5 parse through data and select title and author values 
     const docsArray = bookData.docs
-    // console.log(docs)
     let mapping = docsArray.map(element => {
-        // console.log(element)
         const bookObj = {
             bookTitle: `${element.title}`,
             bookAuthor: `${element.author_name}`,
         }
         creatingBookResultElements(bookObj)
     })
-    // change to map method later?
-    /*for (const element of docs) {
-        const bookObj = {
-            bookTitle: `${element.title}`,
-            bookAuthor: `${element.author_name}`,
-        }*/
-        // creatingBookResultElements(bookObj)
-    // }
 }
 
 function creatingBookResultElements(bookObj) {
-    console.log(bookObj)
+    // console.log(bookObj)
     // 6 send these values to function to create elements and apppend these values to DOM for each book
     const resultDiv = document.createElement('div');
     // 7 create event listener when creating elements that listens for the 'dragend' event of user dragging search result elemt over to reading list
@@ -95,33 +87,26 @@ function addingEventListenersToReadinList(bookListDiv, btn) {
     bookListDiv.addEventListener('mouseenter', e => {
         // const btn = document.querySelector('button').firstChild;
         btn.style.display = ""
-        // console.log(btn)
         const eTarget = e.target;
         eTarget.style.fontSize = 'larger'
-        // console.log(eTarget)
     })
     bookListDiv.addEventListener('mouseleave', e => {
         const eTarget = e.target;
         eTarget.style.fontSize = '16px'
         btn.style.display = "none"
     })
+    // 10 when creating reading list element also add event listener that listens for the 'click' event of user clicking X button and deletes the targeted element from the reading list
     btn.addEventListener('click', e => {
         const readingElementDiv = btn.parentElement
         readingElementDiv.remove()
-        // console.log(readingElementDiv)
-        // console.log(e.target.parentElement)
     })
 }
 
 
 
-// 10 when creating reading list element also add event listener that listens for the 'keydown' event of user pressing down arrow and delets the targeted element from the reading list
 
 // change styling for bigger search bar and submit button
 // refactor code
-// make it so titiles cannot appear more than once in reading list?
-// create deletion for reading list + hidden delete button
-// add in array itteration instance
 
 
 
