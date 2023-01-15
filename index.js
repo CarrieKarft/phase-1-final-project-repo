@@ -4,7 +4,7 @@ function getingUserInput() {
     const searchBar = document.getElementById('searchBar');
     const submitButton = document.getElementById('submitButton');
     // console.log(submitButton)
-    submitButton.addEventListener('submit', e => {
+    submitButton.addEventListener('click', e => {
         // 2 when submit button 'clicked' (event) send that input text to our fetch request
         e.preventDefault()
         document.getElementById('click').innerHTML = ''
@@ -44,7 +44,8 @@ function creatingBookResultElements(bookObj) {
     // 6 send these values to function to create elements and apppend these values to DOM for each book
     const resultDiv = document.createElement('div');
     resultDiv.addEventListener('click', e => {
-        console.log(e.target)
+        creatingTheReadingListElements(bookObj);
+        // console.log(e.target)
     })
     const resultTitle = document.createElement('h4');
     resultTitle.textContent = bookObj.bookTitle;
@@ -63,6 +64,10 @@ function creatingBookResultElements(bookObj) {
     results.appendChild(resultDiv);
 
     // console.log(bookObj.bookAuthor)
+}
+
+function creatingTheReadingListElements(bookObj) {
+    console.log(bookObj)
 }
 
 
