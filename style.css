@@ -1,14 +1,15 @@
 body {
-    background-color: #56373c;
+    background-color: #6fd6ff;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
     text-align: center;
-    color: #d0b0b1;
+    color: white;
 }
 
 h2 {
-    color: #56373c;
+    color: white;
 }
 
 .body {
@@ -17,19 +18,23 @@ h2 {
 }
 
 .searchDiv {
-    background-color: #9f807d;
     margin: 10px;
     padding: 10px;
-    width: 60%;
-    height: 600px;
+    width: 75%;
+    height: 90%;
     display: block;
     text-align: center;
 }
 
 .searchBar {
-    background-color: #9f807d;
     margin: 10px;
     padding: 10px;
+}
+
+.theResults {
+    border-bottom: 1px solid white;
+    margin: 5px;
+    cursor: pointer;
 }
 
 /* .searchResults { */
@@ -40,7 +45,13 @@ h2 {
     text-align: center;
     margin: 10px;
     padding: 10px;
-    width: 30%;
-    height: 600px;
-    background-color: #9f807d;
+    width: 25%;
+    height: 90%;
+    cursor: pointer;
+}
+
+.readLater {
+    margin: 5px;
+    padding: 5px;
+    border-bottom:  1px solid white;
 }
