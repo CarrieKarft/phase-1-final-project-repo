@@ -24,6 +24,7 @@ h2 {
     height: 90%;
     display: block;
     text-align: center;
+    border: 1px solid white;
 }
 
 .searchBar {
