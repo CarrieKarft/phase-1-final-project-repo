@@ -73,28 +73,37 @@ function creatingTheReadingListElements(bookObj) {
     // 8 when event is fired take book that event was triggerd for and send data to function to create element in reading list and append to DOM
     const bookListDiv = document.createElement('div');
     // 9 when creating reading list element add event listener 'mouseover' that enlarges the text of the target of the event
-    addingEventListenersToReadinList(bookListDiv)
-    bookListDiv.textContent = bookObj.bookTitle;
+    // addingEventListenersToReadinList(bookListDiv, btn)
+    bookListDiv.textContent = bookObj.bookTitle + "  ";
     const btn = document.createElement('button');
     btn.textContent = "Delete"
+    btn.style.display = "none"
     bookListDiv.appendChild(btn)
     bookListDiv.style.fontSize = '16px';
     bookListDiv.setAttribute('class', 'readLater');
     let readingListArray = document.getElementsByClassName('readingListDiv');
     const readingList = readingListArray[0];
     readingList.appendChild(bookListDiv);
+    addingEventListenersToReadinList(bookListDiv, btn)
    
 }
 
-function addingEventListenersToReadinList(bookListDiv) {
+function addingEventListenersToReadinList(bookListDiv, btn) {
     bookListDiv.addEventListener('mouseenter', e => {
+        // const btn = document.querySelector('button').firstChild;
+        btn.style.display = ""
+        console.log(btn)
         const eTarget = e.target;
         eTarget.style.fontSize = 'larger'
-        console.log(eTarget)
+        // console.log(eTarget)
     })
     bookListDiv.addEventListener('mouseleave', e => {
         const eTarget = e.target;
         eTarget.style.fontSize = '16px'
+        btn.style.display = "none"
+    })
+    btn.addEventListener('click', e => {
+        console.log(e.target)
     })
 }
 
