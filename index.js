@@ -31,6 +31,8 @@ function fetchinBookData(searchBarText) {
 function noResultsFoundElement() {
     const noResultsDiv = document.createElement('div');
     noResultsDiv.textContent = "No results found. Please check your spelling and try again.";
+    noResultsDiv.style.color = "red";
+    noResultsDiv.style.fontSize = "larger"
     const searchResultsDiv = document.getElementById('results');
     searchResultsDiv.appendChild(noResultsDiv);
 
