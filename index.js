@@ -10,6 +10,7 @@ function getingUserInput() {
         document.getElementById('results').innerHTML = ''
         let searchBarText = searchBar.value
         fetchinBookData(searchBarText)
+        document.getElementById('bookForm').reset()
         // console.log(searchBarText)
     })
 }
@@ -43,6 +44,7 @@ function gettingTitleFromBookData(bookData) {
 function creatingBookResultElements(bookObj) {
     // 6 send these values to function to create elements and apppend these values to DOM for each book
     const resultDiv = document.createElement('div');
+    // 7 create event listener when creating elements that listens for the 'keydown' event of user pressing up arrow
     resultDiv.addEventListener('click', e => {
         creatingTheReadingListElements(bookObj);
         // console.log(e.target)
@@ -67,21 +69,28 @@ function creatingBookResultElements(bookObj) {
 }
 
 function creatingTheReadingListElements(bookObj) {
+    // 8 when event is fired take book that event was triggerd for and send data to function to create element in reading list and append to DOM
     const bookListDiv = document.createElement('div');
+    // 9 when creating reading list element add event listener 'mouseover' that enlarges the text of the target of the event
+    bookListDiv.addEventListener('mouseenter', e => {
+        const eTarget = e.target;
+        eTarget.style.fontSize = 'larger'
+        console.log(eTarget)
+    })
+    bookListDiv.addEventListener('mouseleave', e => {
+        const eTarget = e.target;
+        eTarget.style.fontSize = '16px'
+    })
     bookListDiv.textContent = bookObj.bookTitle;
+    bookListDiv.style.fontSize = '16px';
     bookListDiv.setAttribute('class', 'readLater');
     let readingListArray = document.getElementsByClassName('readingListDiv');
     const readingList = readingListArray[0];
     readingList.appendChild(bookListDiv);
-    console.log(bookObj)
+    // console.log(bookObj)
 }
 
 
-// 7 create event listener when creating elements that listens for the 'keydown' event of user pressing up arrow
-
-// 8 when event is fired take book that event was triggerd for and send data to function to create element in reading list and append to DOM
-
-// 9 when creating reading list element add event listener 'mouseover' that enlarges the text of the target of the event
 
 // 10 when creating reading list element also add event listener that listens for the 'keydown' event of user pressing down arrow and delets the targeted element from the reading list
 
