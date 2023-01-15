@@ -7,7 +7,7 @@ function getingUserInput() {
     submitButton.addEventListener('click', e => {
         // 2 when submit button 'clicked' (event) send that input text to our fetch request
         e.preventDefault()
-        document.getElementById('click').innerHTML = ''
+        document.getElementById('results').innerHTML = ''
         let searchBarText = searchBar.value
         fetchinBookData(searchBarText)
         // console.log(searchBarText)
@@ -67,6 +67,12 @@ function creatingBookResultElements(bookObj) {
 }
 
 function creatingTheReadingListElements(bookObj) {
+    const bookListDiv = document.createElement('div');
+    bookListDiv.textContent = bookObj.bookTitle;
+    bookListDiv.setAttribute('class', 'readLater');
+    let readingListArray = document.getElementsByClassName('readingListDiv');
+    const readingList = readingListArray[0];
+    readingList.appendChild(bookListDiv);
     console.log(bookObj)
 }
 
