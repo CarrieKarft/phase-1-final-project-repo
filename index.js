@@ -20,11 +20,12 @@ function fetchinBookData(searchBarText) {
     .then(resp => resp.json())
     // 4 return data from api
     .then(bookData => {
-        if (bookData.numFound > 0) {
+        bookData.numFound > 0 ? gettingTitleFromBookData(bookData) : noResultsFoundElement();
+        /*if (bookData.numFound > 0) {
             gettingTitleFromBookData(bookData)
         } else {
             noResultsFoundElement()
-        }
+        }*/
     });
 }
 
@@ -95,7 +96,6 @@ function creatingTheReadingListElements(bookObj) {
 
 function addingEventListenersToReadinList(bookListDiv, btn) {
     bookListDiv.addEventListener('mouseenter', e => {
-        // const btn = document.querySelector('button').firstChild;
         btn.style.display = ""
         const eTarget = e.target;
         eTarget.style.fontSize = 'larger'
