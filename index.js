@@ -63,11 +63,14 @@ function creatingBookResultElements(bookObj) {
     bookObj.bookAuthor === 'undefined' ? resultAuthor.textContent = "Author Not Available" : resultAuthor.textContent = bookObj.bookAuthor;
     const bookSubject = document.createElement('p');
     bookObj.subjects === 'undefined' ? bookSubject.textContent = "Subject Not Available" : bookSubject.textContent = bookObj.subjects;
-    
+    const dragInstructions = document.createElement('p');
+    dragInstructions.textContent = "drag book to reading list to save for later";
+    dragInstructions.setAttribute('class', 'drag')
     resultDiv.appendChild(bookSubject);
     resultDiv.appendChild(resultTitle);
     resultDiv.appendChild(resultAuthor);
     resultDiv.appendChild(bookSubject);
+    resultDiv.appendChild(dragInstructions);
     resultDiv.setAttribute('class', 'theResults')
     resultDiv.setAttribute('draggable', 'true')
     const results = document.getElementById('results')
