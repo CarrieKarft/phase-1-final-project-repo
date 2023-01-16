@@ -21,11 +21,6 @@ function fetchinBookData(searchBarText) {
     // 4 return data from api
     .then(bookData => {
         bookData.numFound > 0 ? gettingTitleFromBookData(bookData) : noResultsFoundElement();
-        /*if (bookData.numFound > 0) {
-            gettingTitleFromBookData(bookData)
-        } else {
-            noResultsFoundElement()
-        }*/
     });
 }
 
@@ -53,7 +48,6 @@ function gettingTitleFromBookData(bookData) {
 }
 
 function creatingBookResultElements(bookObj) {
-    // console.log(bookObj)
     // 6 send these values to function to create elements and apppend these values to DOM for each book
     const resultDiv = document.createElement('div');
     // 7 create event listener when creating elements that listens for the 'dragend' event of user dragging search result elemt over to reading list
@@ -63,11 +57,12 @@ function creatingBookResultElements(bookObj) {
     const resultTitle = document.createElement('h4');
     resultTitle.textContent = bookObj.bookTitle;
     const resultAuthor = document.createElement('p');
-    if (bookObj.bookAuthor === 'undefined') {
+    bookObj.bookAuthor === 'undefined' ? resultAuthor.textContent = "Author Not Available" : resultAuthor.textContent = bookObj.bookAuthor;
+    /*if (bookObj.bookAuthor === 'undefined') {
         resultAuthor.textContent = "Author Not Available"
      } else {
         resultAuthor.textContent = bookObj.bookAuthor;
-     }
+     }*/
     resultDiv.appendChild(resultTitle)
     resultDiv.appendChild(resultAuthor)
     resultDiv.setAttribute('class', 'theResults')
