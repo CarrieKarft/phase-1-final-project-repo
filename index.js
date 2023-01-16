@@ -20,6 +20,7 @@ function fetchinBookData(searchBarText) {
     .then(resp => resp.json())
     // 4 return data from api
     .then(bookData => {
+        // console.log(bookData)
         bookData.numFound > 0 ? gettingTitleFromBookData(bookData) : noResultsFoundElement();
     });
 }
@@ -42,12 +43,14 @@ function gettingTitleFromBookData(bookData) {
         const bookObj = {
             bookTitle: `${element.title}`,
             bookAuthor: `${element.author_name}`,
+            subjects: `${element.subject}`,
         }
         creatingBookResultElements(bookObj)
     })
 }
 
 function creatingBookResultElements(bookObj) {
+    console.log(bookObj.subjects)
     // 6 send these values to function to create elements and apppend these values to DOM for each book
     const resultDiv = document.createElement('div');
     // 7 create event listener when creating elements that listens for the 'dragend' event of user dragging search result elemt over to reading list
@@ -58,13 +61,13 @@ function creatingBookResultElements(bookObj) {
     resultTitle.textContent = bookObj.bookTitle;
     const resultAuthor = document.createElement('p');
     bookObj.bookAuthor === 'undefined' ? resultAuthor.textContent = "Author Not Available" : resultAuthor.textContent = bookObj.bookAuthor;
-    /*if (bookObj.bookAuthor === 'undefined') {
-        resultAuthor.textContent = "Author Not Available"
-     } else {
-        resultAuthor.textContent = bookObj.bookAuthor;
-     }*/
-    resultDiv.appendChild(resultTitle)
-    resultDiv.appendChild(resultAuthor)
+    const bookSubject = document.createElement('p');
+    bookObj.subjects === 'undefined' ? bookSubject.textContent = "Subject Not Available" : bookSubject.textContent = bookObj.subjects;
+    
+    resultDiv.appendChild(bookSubject);
+    resultDiv.appendChild(resultTitle);
+    resultDiv.appendChild(resultAuthor);
+    resultDiv.appendChild(bookSubject);
     resultDiv.setAttribute('class', 'theResults')
     resultDiv.setAttribute('draggable', 'true')
     const results = document.getElementById('results')
@@ -85,11 +88,11 @@ function creatingTheReadingListElements(bookObj) {
     let readingListArray = document.getElementsByClassName('readingListDiv');
     const readingList = readingListArray[0];
     readingList.appendChild(bookListDiv);
-    addingEventListenersToReadinList(bookListDiv, btn)
+    addingEventListenersToReadingList(bookListDiv, btn)
    
 }
 
-function addingEventListenersToReadinList(bookListDiv, btn) {
+function addingEventListenersToReadingList(bookListDiv, btn) {
     bookListDiv.addEventListener('mouseenter', e => {
         btn.style.display = ""
         const eTarget = e.target;
@@ -106,17 +109,6 @@ function addingEventListenersToReadinList(bookListDiv, btn) {
         readingElementDiv.remove()
     })
 }
-
-
-
-
-// change styling for bigger search bar and submit button
-// refactor code
-
-
-
-
-
 
 /* Psudeo Code
 1 grab the text entered into search bar by user
@@ -135,10 +127,10 @@ function addingEventListenersToReadinList(bookListDiv, btn) {
 Click event
 To click the search button to look up a book in the API
 
-Keydown event
+Dragend event
 To add a book to their read later list, and delete book from read later list
 
-Mouseover event 
+Mouseover event (mouseenter and mouseleave)
 To enlarge the title text of each book once it is in their read later list (just in case the user forgot to wear their reading glasses)
 */
 
