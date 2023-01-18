@@ -64,7 +64,7 @@ function creatingBookResultElements(bookObj) {
     const bookSubject = document.createElement('p');
     bookObj.subjects === 'undefined' ? bookSubject.textContent = "Subject Not Available" : bookSubject.textContent = bookObj.subjects;
     const dragInstructions = document.createElement('p');
-    dragInstructions.textContent = "drag book to reading list to save for later";
+    dragInstructions.textContent = "DRAG BOOK TO READING LIST TO SAVE FOR LATER";
     dragInstructions.setAttribute('class', 'drag')
     resultDiv.appendChild(bookSubject);
     resultDiv.appendChild(resultTitle);
@@ -113,6 +113,7 @@ function addingEventListenersToReadingList(bookListDiv, btn) {
     })
 }
 
+
 /* Psudeo Code
 1 grab the text entered into search bar by user
 2 when submit button 'clicked' send that input text to our fetch request
@@ -147,3 +148,4 @@ The users read later list will be located on a separate portion of the page
 If the user scrolls over the title of the books in their read later list the title text will appear larger for better visibility.
 The user will also be able to delete books from their read later list by pressing the down arrow key.
 */
+
