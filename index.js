@@ -1,6 +1,10 @@
 // assigning elements to variable names in the global scope
-const searchBar = document.getElementById('searchBar');
-const submitButton = document.getElementById('submitButton');
+// grabbing form elements
+const form = document.querySelector('#bookForm').children
+const [searchBar, submitButton] = form
+// grabbiing div containers for elements
+const results = document.getElementById('results')
+const readingList = document.querySelector('.readingListDiv');
 
 
 function getingUserInput() {
@@ -32,8 +36,7 @@ function noResultsFoundElement() {
     noResultsDiv.textContent = "No results found. Please check your spelling and try again.";
     noResultsDiv.style.color = "red";
     noResultsDiv.style.fontSize = "larger"
-    const searchResultsDiv = document.getElementById('results');
-    searchResultsDiv.appendChild(noResultsDiv);
+    results.appendChild(noResultsDiv);
 
 }
 
@@ -41,7 +44,7 @@ function gettingTitleFromBookData(bookData) {
     console.log(bookData)
     // 5 parse through data and select title and author values 
     const docsArray = bookData.docs
-    let mapping = docsArray.map(element => {
+    docsArray.map(element => {
         const bookObj = {
             bookTitle: `${element.title}`,
             bookAuthor: `${element.author_name}`,
@@ -56,7 +59,7 @@ function creatingBookResultElements(bookObj) {
     // 6 send these values to function to create elements and apppend these values to DOM for each book
     const resultDiv = document.createElement('div');
     // 7 create event listener when creating elements that listens for the 'dragend' event of user dragging search result elemt over to reading list
-    resultDiv.addEventListener('dragend', e => {
+    resultDiv.addEventListener('dragend', () => {
         creatingTheReadingListElements(bookObj);
     })
     const resultTitle = document.createElement('h4');
@@ -75,7 +78,6 @@ function creatingBookResultElements(bookObj) {
     resultDiv.appendChild(dragInstructions);
     resultDiv.setAttribute('class', 'theResults')
     resultDiv.setAttribute('draggable', 'true')
-    const results = document.getElementById('results')
     results.appendChild(resultDiv);
 }
 
@@ -90,11 +92,8 @@ function creatingTheReadingListElements(bookObj) {
     bookListDiv.appendChild(btn)
     bookListDiv.style.fontSize = '16px';
     bookListDiv.setAttribute('class', 'readLater');
-    let readingListArray = document.getElementsByClassName('readingListDiv');
-    const readingList = readingListArray[0];
     readingList.appendChild(bookListDiv);
     addingEventListenersToReadingList(bookListDiv, btn)
-   
 }
 
 function addingEventListenersToReadingList(bookListDiv, btn) {
@@ -109,7 +108,7 @@ function addingEventListenersToReadingList(bookListDiv, btn) {
         btn.style.display = "none"
     })
     // 10 when creating reading list element also add event listener that listens for the 'click' event of user clicking X button and deletes the targeted element from the reading list
-    btn.addEventListener('click', e => {
+    btn.addEventListener('click', () => {
         const readingElementDiv = btn.parentElement
         readingElementDiv.remove()
     })
