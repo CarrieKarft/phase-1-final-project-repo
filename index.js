@@ -1,7 +1,9 @@
 // assigning elements to variable names in the global scope
 // grabbing form elements
-const form = document.querySelector('#bookForm').children
-const [searchBar, submitButton] = form
+const form = document.querySelector('#bookForm')
+const [searchBar, submitButton] = form.children
+// console.log(submitButton)
+// console.log(searchBar)
 // grabbiing div containers for elements
 const results = document.getElementById('results')
 const readingList = document.querySelector('.readingListDiv');
@@ -15,7 +17,7 @@ function getingUserInput() {
         document.getElementById('results').innerHTML = ''
         let searchBarText = searchBar.value
         fetchinBookData(searchBarText)
-        document.getElementById('bookForm').reset()
+        form.reset()
     })
 }
 getingUserInput()
