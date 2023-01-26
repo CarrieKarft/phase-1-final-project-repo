@@ -1,8 +1,10 @@
+// assigning elements to variable names in the global scope
+const searchBar = document.getElementById('searchBar');
+const submitButton = document.getElementById('submitButton');
+
 
 function getingUserInput() {
     // 1 grab the text entered into search bar by user
-    const searchBar = document.getElementById('searchBar');
-    const submitButton = document.getElementById('submitButton');
     submitButton.addEventListener('click', e => {
         // 2 when submit button 'clicked' (event) send that input text to our fetch request
         e.preventDefault()
@@ -16,7 +18,7 @@ getingUserInput()
 
 function fetchinBookData(searchBarText) {
     // 3 fetch specified book title form Open Library API
-    fetch(`https://openlibrary.org/search.json?title=${searchBarText}`)
+    return fetch(`https://openlibrary.org/search.json?title=${searchBarText}`)
     .then(resp => resp.json())
     // 4 return data from api
     .then(bookData => {
@@ -50,7 +52,7 @@ function gettingTitleFromBookData(bookData) {
 }
 
 function creatingBookResultElements(bookObj) {
-    console.log(bookObj.subjects)
+    // console.log(bookObj.subjects)
     // 6 send these values to function to create elements and apppend these values to DOM for each book
     const resultDiv = document.createElement('div');
     // 7 create event listener when creating elements that listens for the 'dragend' event of user dragging search result elemt over to reading list
