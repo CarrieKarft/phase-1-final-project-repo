@@ -9,7 +9,7 @@ const readingList = document.querySelector('.readingListDiv');
 function getingUserInput() {
     submitButton.addEventListener('click', e => {
         e.preventDefault()
-        document.getElementById('results').innerHTML = ''
+        results.innerHTML = '';
         let searchBarText = searchBar.value
         fetchinBookData(searchBarText)
         form.reset()
@@ -36,7 +36,7 @@ function noResultsFoundElement() {
 }
 
 function gettingTitleFromBookData(bookData) {
-    console.log(bookData)
+    // console.log(bookData)
     const docsArray = bookData.docs
     docsArray.map(element => {
         const bookObj = {
@@ -50,9 +50,7 @@ function gettingTitleFromBookData(bookData) {
 
 function creatingBookResultElements(bookObj) {
     const resultDiv = document.createElement('div');
-    resultDiv.addEventListener('dragend', () => {
-        creatingTheReadingListElements(bookObj);
-    })
+    resultDiv.addEventListener('dragend', () => creatingTheReadingListElements(bookObj))
     const resultTitle = document.createElement('h4');
     resultTitle.textContent = bookObj.bookTitle;
     const resultAuthor = document.createElement('p');
